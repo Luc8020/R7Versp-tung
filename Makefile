@@ -47,7 +47,6 @@ run:
 	@echo ""
 	@echo "Starting backend server on port 3000..."
 	@cd Backend && npm start &
-	@sleep 5
 	@echo "Waiting for backend to be ready..."
 	@timeout=30; while ! curl -s http://localhost:3000/api/health > /dev/null 2>&1 && [ $$timeout -gt 0 ]; do \
 		sleep 1; \
@@ -88,7 +87,6 @@ dev:
 	fi
 	@echo "Starting backend server with nodemon on port 3000..."
 	@cd Backend && npm run dev &
-	@sleep 5
 	@echo "Waiting for backend to be ready..."
 	@timeout=30; while ! curl -s http://localhost:3000/api/health > /dev/null 2>&1 && [ $$timeout -gt 0 ]; do \
 		sleep 1; \
