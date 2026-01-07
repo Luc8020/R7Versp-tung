@@ -41,8 +41,36 @@ A web application to track and display delays of the R7 bus line between Zweibr√
 ### Prerequisites
 - Node.js (v18 or higher recommended)
 - npm
+- make (optional, for simplified commands)
 
-### Installation
+### Quick Start (using Makefile)
+
+The easiest way to run the application is using the provided Makefile:
+
+```bash
+# Clone the repository
+git clone https://github.com/Luc8020/R7Versp-tung.git
+cd R7Versp-tung
+
+# Install all dependencies
+make install
+
+# Run the complete application
+make run
+```
+
+The application will be available at `http://localhost:8080`
+
+**Available Make Commands:**
+- `make help` - Show all available commands
+- `make install` - Install all dependencies (backend + frontend)
+- `make run` - Run the complete application (both servers)
+- `make run-backend` - Run backend server only (port 3000)
+- `make run-frontend` - Run frontend server only (port 8080)
+- `make dev` - Run both servers in development mode with auto-reload
+- `make clean` - Remove node_modules and build artifacts
+
+### Manual Installation (without Makefile)
 
 1. Clone the repository:
 ```bash
@@ -62,7 +90,7 @@ cd ../Frontend
 npm install
 ```
 
-### Running the Application
+### Running the Application Manually
 
 1. Start the backend server (default port: 3000):
 ```bash
