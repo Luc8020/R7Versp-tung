@@ -3,23 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>R7 Verspätung</title>
+  <title>R7 Verspätung - Zweibrücken ↔ Homburg</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>R7 Verspätung</h1>
+      <h1>🚌 R7 Verspätung</h1>
+      <p class="subtitle">Zweibrücken ↔ Homburg (Saarland)</p>
     </header>
     
     <main>
-      <div class="content">
-        <p>Willkommen bei der R7 Verspätungs-App</p>
+      <!-- Connection Status -->
+      <div id="connection-status" class="status-bar">
+        <span class="status-indicator"></span>
+        <span class="status-text">Verbindung wird hergestellt...</span>
+      </div>
+
+      <!-- Route Summary -->
+      <section class="summary-section">
+        <h2>Übersicht</h2>
+        <div class="summary-cards" id="summary-cards">
+          <div class="summary-card">
+            <span class="card-label">Durchschnittliche Verspätung</span>
+            <span class="card-value" id="avg-delay">-- Min</span>
+          </div>
+          <div class="summary-card">
+            <span class="card-label">Maximale Verspätung</span>
+            <span class="card-value" id="max-delay">-- Min</span>
+          </div>
+          <div class="summary-card">
+            <span class="card-label">Pünktlichkeit</span>
+            <span class="card-value" id="on-time-percentage">--%</span>
+          </div>
+          <div class="summary-card">
+            <span class="card-label">Haltestellen pünktlich</span>
+            <span class="card-value" id="stops-on-time">-- / --</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stop Filter -->
+      <section class="filter-section">
+        <label for="stop-filter">Haltestelle auswählen:</label>
+        <select id="stop-filter">
+          <option value="all">Alle Haltestellen</option>
+        </select>
+      </section>
+
+      <!-- Delays Table -->
+      <section class="delays-section">
+        <h2>Aktuelle Verspätungen</h2>
+        <div class="table-container">
+          <table id="delays-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Haltestelle</th>
+                <th>Planmäßige Abfahrt</th>
+                <th>Erwartete Ankunft</th>
+                <th>Verspätung</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="delays-body">
+              <tr>
+                <td colspan="6" class="loading">Daten werden geladen...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Last Update Info -->
+      <div class="update-info">
+        <span>Letzte Aktualisierung: <span id="last-update">--:--:--</span></span>
+        <button id="refresh-btn" class="refresh-btn">🔄 Aktualisieren</button>
       </div>
     </main>
     
     <footer>
-      <p>&copy; 2026 R7 Verspätung</p>
+      <p>&copy; 2026 R7 Verspätung | Daten werden regelmäßig aktualisiert</p>
     </footer>
   </div>
   

@@ -5,10 +5,10 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: #333;
-  background-color: #f4f4f4;
+  background-color: #e8f4f8;
 }
 
 .container {
@@ -18,29 +18,311 @@ body {
 }
 
 header {
-  background-color: #333;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
   color: #fff;
-  padding: 20px;
+  padding: 30px;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 10px;
   margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+header .subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
 }
 
 main {
   background-color: #fff;
   padding: 30px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   min-height: 400px;
 }
 
-.content {
+/* Status Bar */
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+.status-bar.connected {
+  background-color: #d4edda;
+}
+
+.status-bar.connected.simulated {
+  background-color: #fff3cd;
+}
+
+.status-bar.disconnected {
+  background-color: #f8d7da;
+}
+
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #6c757d;
+  animation: pulse 2s infinite;
+}
+
+.status-bar.connected .status-indicator {
+  background-color: #28a745;
+}
+
+.status-bar.disconnected .status-indicator {
+  background-color: #dc3545;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Summary Section */
+.summary-section {
+  margin-bottom: 30px;
+}
+
+.summary-section h2 {
+  margin-bottom: 15px;
+  color: #1e3c72;
+  border-bottom: 2px solid #1e3c72;
+  padding-bottom: 10px;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.summary-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
   text-align: center;
-  padding: 40px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.summary-card .card-label {
+  display: block;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 5px;
+}
+
+.summary-card .card-value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Filter Section */
+.filter-section {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-section label {
+  font-weight: bold;
+  color: #1e3c72;
+}
+
+.filter-section select {
+  padding: 10px 15px;
+  border: 2px solid #1e3c72;
+  border-radius: 5px;
+  font-size: 1rem;
+  min-width: 250px;
+  cursor: pointer;
+}
+
+/* Delays Section */
+.delays-section h2 {
+  margin-bottom: 15px;
+  color: #1e3c72;
+  border-bottom: 2px solid #1e3c72;
+  padding-bottom: 10px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+#delays-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+#delays-table th,
+#delays-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#delays-table th {
+  background-color: #1e3c72;
+  color: white;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+}
+
+#delays-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+#delays-table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.loading {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+  font-style: italic;
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.status-badge.on-time {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-badge.slight-delay {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.delayed {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.status-badge.heavily-delayed {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Update Info */
+.update-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  color: #666;
+}
+
+.refresh-btn {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.refresh-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.refresh-btn:active {
+  transform: translateY(0);
+}
+
+/* Delay Value Styling */
+.delay-value {
+  font-weight: bold;
+}
+
+.delay-value.no-delay {
+  color: #28a745;
+}
+
+.delay-value.small-delay {
+  color: #ffc107;
+}
+
+.delay-value.medium-delay {
+  color: #fd7e14;
+}
+
+.delay-value.large-delay {
+  color: #dc3545;
+}
+
+/* Additional styles for real-time data */
+.no-data {
+  background-color: #f8f9fa;
+}
+
+.no-service {
+  color: #6c757d;
+  font-style: italic;
+  text-align: center;
+}
+
+.hafas-name {
+  color: #6c757d;
+  font-size: 0.85rem;
+}
+
+.direction {
+  color: #2a5298;
+  font-size: 0.85rem;
+}
+
+.cancelled {
+  background-color: #f8d7da !important;
+  text-decoration: line-through;
+}
+
+.status-badge.cancelled {
+  background-color: #dc3545;
+  color: white;
+  text-decoration: none;
+}
+
+.refresh-btn:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+/* Data source indicator */
+.data-source {
+  font-size: 0.85rem;
+  color: #28a745;
+  margin-left: 10px;
 }
 
 footer {
@@ -48,4 +330,54 @@ footer {
   padding: 20px;
   margin-top: 20px;
   color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+  
+  header .subtitle {
+    font-size: 1rem;
+  }
+  
+  .summary-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .filter-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filter-section select {
+    width: 100%;
+  }
+  
+  .update-info {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  #delays-table th,
+  #delays-table td {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+  
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .summary-card .card-value {
+    font-size: 1.5rem;
+  }
 }
