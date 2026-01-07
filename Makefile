@@ -47,10 +47,15 @@ run:
 	@echo ""
 	@echo "Starting backend server on port 3000..."
 	@cd Backend && npm start &
-	@sleep 3
+	@sleep 5
+	@echo "Waiting for backend to be ready..."
+	@timeout=30; while ! curl -s http://localhost:3000/api/health > /dev/null 2>&1 && [ $$timeout -gt 0 ]; do \
+		sleep 1; \
+		timeout=$$((timeout-1)); \
+	done
 	@echo "Starting frontend server on port 8080..."
 	@cd Frontend && npm start &
-	@sleep 2
+	@sleep 3
 	@echo ""
 	@echo "✅ Application is running!"
 	@echo "   Backend API:  http://localhost:3000"
@@ -73,12 +78,25 @@ run-frontend:
 dev:
 	@echo "🔧 Starting R7Verspätung in development mode..."
 	@echo ""
+	@if [ ! -f Backend/package.json ] || ! grep -q '"dev"' Backend/package.json; then \
+		echo "❌ Error: Backend dev script not found in package.json"; \
+		exit 1; \
+	fi
+	@if [ ! -f Frontend/package.json ] || ! grep -q '"dev"' Frontend/package.json; then \
+		echo "❌ Error: Frontend dev script not found in package.json"; \
+		exit 1; \
+	fi
 	@echo "Starting backend server with nodemon on port 3000..."
 	@cd Backend && npm run dev &
-	@sleep 3
+	@sleep 5
+	@echo "Waiting for backend to be ready..."
+	@timeout=30; while ! curl -s http://localhost:3000/api/health > /dev/null 2>&1 && [ $$timeout -gt 0 ]; do \
+		sleep 1; \
+		timeout=$$((timeout-1)); \
+	done
 	@echo "Starting frontend server with nodemon on port 8080..."
 	@cd Frontend && npm run dev &
-	@sleep 2
+	@sleep 3
 	@echo ""
 	@echo "✅ Application is running in development mode!"
 	@echo "   Backend API:  http://localhost:3000"
